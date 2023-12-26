@@ -1,6 +1,6 @@
 const router = require("express").Router();
 let Student = require("../models/Student");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 //Add a Students
 router.route("/add").post((req, res) => {
@@ -37,9 +37,9 @@ router.route("/").get((req, res) => {
 router.route("/update/:id").put(async (req, res) => {
   let userId = req.params.id;
 
-  //   if (!mongoose.Types.ObjectId.isValid(userId)) {
-  //     return res.status(400).send({ status: "Invalid ObjectId format" });
-  //   }
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).send({ status: "Invalid ObjectId format" });
+  }
 
   const { name, age, gender } = req.body;
 
@@ -48,13 +48,27 @@ router.route("/update/:id").put(async (req, res) => {
     age,
     gender,
   };
-  const update = await Student.findByIdUpdate(userId, updatestudent);
-  then(() => {
-    res.status(200).send({ status: "User updated", user:update });
-  }).catch((err) => {
-    console.log(err);
-    res.status(500).send({ status: "Error with updatig data" });
-  });
+  const update = await Student.findByIdAndUpdate(userId, updatestudent)
+    .then(() => {
+      res.status(200).send({ status: "User updated"});
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ status: "Error with updatig data" });
+    });
 });
 
+//Delete a Student
+router.route("/delete/:id").delete(async (req, res) => {
+  let userId = req.params.id;
+
+  await Student.findByIdAndDelete(userId)
+    .then(() => {
+      res.status(200).send({ status: "Student:deleted" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ status: "Error with delete Student" });
+    });
+});
 module.exports = router;
