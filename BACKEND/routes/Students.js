@@ -33,6 +33,18 @@ router.route("/").get((req, res) => {
     });
 });
 
+//Get single Student
+router.route("/get/:name").get(async (req, res) => {
+  let username = req.params.name;
+
+  const foundStudent = await Student.findOne({ name: username });
+  if (foundStudent) {
+    res.status(200).json(foundStudent);
+  } else {
+    res.status(404).send({ status: "Student not found" });
+  }
+});
+
 //Update a Student
 router.route("/update/:id").put(async (req, res) => {
   let userId = req.params.id;
@@ -50,7 +62,7 @@ router.route("/update/:id").put(async (req, res) => {
   };
   const update = await Student.findByIdAndUpdate(userId, updatestudent)
     .then(() => {
-      res.status(200).send({ status: "User updated"});
+      res.status(200).send({ status: "User updated" });
     })
     .catch((err) => {
       console.log(err);
