@@ -19,7 +19,7 @@ router.route("/add").post((req, res) => {
       res.json("Student added");
     })
     .catch((error) => {
-      console.log(err);
+      console.log(error);
     });
 });
 //Get All Students
