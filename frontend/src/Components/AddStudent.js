@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 
 function AddStudent() {
@@ -24,6 +24,7 @@ function AddStudent() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+ 
 
   function senddata(e) {
     e.preventDefault();
@@ -38,6 +39,8 @@ function AddStudent() {
       alert(err)
     })
   }
+
+
 
   return (
     <div style={formStyle}>
@@ -83,6 +86,9 @@ function AddStudent() {
           Submit
         </button>
       </form>
+
+      
+
     </div>
   );
 }
