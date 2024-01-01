@@ -24,7 +24,7 @@ function AllStudent() {
       <ul>
         {students.map((student) => (
           <li key={student.id}>
-            {student.name} - {student.age} - {student.gender} 
+            {student.name} - {student.age} - {student.gender} 5
           </li>
         ))}
       </ul>

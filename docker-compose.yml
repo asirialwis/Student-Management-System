@@ -1,0 +1,24 @@
+version: "3"
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./BACKEND
+    ports:
+      - "8070:8070"
+    environment:
+      - MONGODB_URL = mongodb+srv://mongotut:testing123@cluster0.lnulx5i.mongodb.net/student_db?retryWrites=true&w=majority
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
