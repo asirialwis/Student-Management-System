@@ -21,37 +21,6 @@ function AllStudent() {
   return (
     <div>
       <h1>All Student</h1>
-      {/* <ul>
-        {students.map((student) => (
-          <li key={student.id}>
-            {student.name} - {student.age} - {student.gender}
-          </li>
-        ))}
-      </ul> */}
-      {/* form method */}
-
-      {/* <form>
-    {students.map((student) => (
-      <div key={student.id}>
-        <label>
-          Name:
-          <input type="text" value={student.name} readOnly />
-        </label>
-        <br />
-        <label>
-          Age:
-          <input type="number" value={student.age} readOnly />
-        </label>
-        <br />
-        <label>
-          Gender:
-          <input type="text" value={student.gender} readOnly />
-        </label>
-        <br />
-        <br />
-      </div>
-    ))}
-  </form> */}
 
       <table>
         <thead>
